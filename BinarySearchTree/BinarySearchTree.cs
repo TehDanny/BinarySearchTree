@@ -81,14 +81,46 @@ namespace BinarySearchTree
             }
         }
 
-        public void SearchLinearly()
+        public bool SearchLinearly(int value)
         {
+            if (Root == null)
+                return false;
 
+            if (Root.Data == value)
+                return true;
+
+            Node nextNode = Root;
+            Node parentNode = null;
+
+            while (nextNode != null)
+            {
+                parentNode = nextNode;
+                if (value == nextNode.Data)
+                    return true;
+                else if (value < nextNode.Data)
+                    nextNode.Left = nextNode;
+                else
+                    nextNode.Right = nextNode;
+            }
+            return false;
         }
 
-        public void SearchRecursively()
+        public bool SearchRecursively(int value)
+        {
+            if (Root == null)
+                return false;
+
+            Node currentNode = Root;
+
+            SearchRecursively(value, currentNode);
+            return false;
+        }
+
+        public bool SearchRecursively(int value, Node currentNode)
         {
 
+
+            return false;
         }
     }
 }
