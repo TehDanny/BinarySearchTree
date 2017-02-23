@@ -12,13 +12,14 @@ namespace BinarySearchTree
 
         public BinarySearchTree()
         {
-            Root = new Node();
+            
         }
 
-        public void InsertLinearly(int value) // I dislike having two while loops here, but I haven't come up with anything better
+        public void InsertLinearly(int value)
         {
             if (Root == null)
             {
+                Root = new Node();
                 Root.Data = value;
                 return;
             }
@@ -26,20 +27,58 @@ namespace BinarySearchTree
             Node newNode = new Node();
             newNode.Data = value;
             Node nextNode = Root;
+            Node parent = null;
 
             while (nextNode!=null)
             {
+                parent = nextNode;
                 if (value < nextNode.Data)
-                    nextNode.Left = nextNode;
-                if (value > nextNode.Data)
-                    nextNode.Right = nextNode;
+                    nextNode= nextNode.Left;
+                else
+                    nextNode = nextNode.Right;
             }
-            nextNode = newNode;
+            if (value < parent.Data)
+                parent.Left = newNode;
+            else
+                parent.Right = newNode;
         }
 
-        public void InsertRecursively()
+        public void InsertRecursively(int value)
         {
+            if (Root == null)
+            {
+                Root.Data = value;
+                return;
+            }
+            InsertRecursively(value, Root);
+        }
 
+        private void InsertRecursively(int value, Node currentNode)
+        {
+            if (value < currentNode.Data)
+            {
+                if (currentNode.Left == null)
+                {
+                    currentNode.Left = new Node();
+                    currentNode.Left.Data = value;
+                }
+                else
+                {
+                    InsertRecursively(value, currentNode.Left);
+                }
+            }
+            else
+            {
+                if (currentNode.Right == null)
+                {
+                    currentNode.Right = new Node();
+                    currentNode.Right.Data = value;
+                }
+                else
+                {
+                    InsertRecursively(value, currentNode.Right);
+                }
+            }
         }
 
         public void SearchLinearly()
