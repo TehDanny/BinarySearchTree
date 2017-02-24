@@ -15,7 +15,7 @@ namespace BinarySearchTree
             
         }
 
-        public void InsertLinearly(int value)
+        public void InsertIterarively(int value)
         {
             if (Root == null)
             {
@@ -81,46 +81,63 @@ namespace BinarySearchTree
             }
         }
 
-        public bool SearchLinearly(int value)
+        public Node SearchInteratively(int value)
         {
             if (Root == null)
-                return false;
+                return null;
 
             if (Root.Data == value)
-                return true;
+                return Root;
 
-            Node nextNode = Root;
+            Node currentNode = Root;
             Node parentNode = null;
 
-            while (nextNode != null)
+            while (currentNode != null)
             {
-                parentNode = nextNode;
-                if (value == nextNode.Data)
-                    return true;
-                else if (value < nextNode.Data)
-                    nextNode.Left = nextNode;
+                parentNode = currentNode;
+                if (value == currentNode.Data)
+                    return currentNode;
+                else if (value < currentNode.Data)
+                    currentNode.Left = currentNode;
                 else
-                    nextNode.Right = nextNode;
+                    currentNode.Right = currentNode;
             }
-            return false;
+            return null;
         }
 
-        public bool SearchRecursively(int value)
+        public Node SearchRecursively(int value)
         {
             if (Root == null)
-                return false;
+                return null;
 
             Node currentNode = Root;
 
-            SearchRecursively(value, currentNode);
-            return false;
+            return SearchRecursively(value, currentNode);
         }
 
-        public bool SearchRecursively(int value, Node currentNode)
+        public Node SearchRecursively(int value, Node currentNode)
+        {
+            if (currentNode == null)
+                return null;
+
+            if (value == currentNode.Data)
+                return currentNode;
+            else if (value < currentNode.Data)
+                SearchRecursively(value, currentNode.Left);
+            else
+                SearchRecursively(value, currentNode.Right);
+
+            return null;
+        }
+
+        public void DeleteIteratively()
         {
 
+        }
 
-            return false;
+        public void DeleteRecursively()
+        {
+
         }
     }
 }
