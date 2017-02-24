@@ -132,12 +132,95 @@ namespace BinarySearchTree
             return null;
         }
 
-        public void DeleteIteratively()
+        public void DeleteIteratively(int value) // not complete. I don't know how to write this without ref and I don't know how to use ref
+        {
+            if (Root == null)
+                throw new Exception();
+
+            Node currentNode = Root;
+            Node parentNode = null;
+
+            if (Root.Data == value) // dublicate code, but only way to delete Root without somehow using the ref keyword
+            {
+                if (Root.Left == null && Root.Left == null)
+                {
+                    Root = null;
+                    return;
+                }
+                else if (Root.Left != null && Root.Right == null)
+                {
+                    Root = Root.Left;
+                    return;
+                }
+                else if (Root.Left == null && Root.Right != null)
+                {
+                    Root = Root.Right;
+                    return;
+                }
+                else if (Root.Left != null && Root.Right != null)
+                {
+                    // I don't know how to continue from here
+
+                    //Node tempLeftNode = Root.Left;
+                    //Node tempRightNode = Root.Right;
+                }
+            }
+            else if (Root.Data < value)
+            {
+                currentNode = currentNode.Left;
+            }
+            else
+            {
+                currentNode = currentNode.Right;
+            }
+
+            while (currentNode != null)
+            {
+                if (currentNode.Data == value)
+                {
+                    if (currentNode.Left == null && currentNode.Left == null)
+                    {
+                        currentNode = null;
+                        return;
+                    }
+                    else if (currentNode.Left != null && currentNode.Right == null)
+                    {
+                        currentNode = currentNode.Left;
+                        return;
+                    }
+                    else if (currentNode.Left == null && currentNode.Right != null)
+                    {
+                        currentNode = currentNode.Right;
+                        return;
+                    }
+                    else if (currentNode.Left != null && currentNode.Right != null)
+                    {
+                        // I don't know how to continue from here
+
+                        //Node tempLeftNode = currentNode.Left;
+                        //Node tempRightNode = currentNode.Right;
+                    }
+                }
+                else if (currentNode.Data < value)
+                {
+                    currentNode = currentNode.Left;
+                }
+                else
+                {
+                    currentNode = currentNode.Right;
+                }
+            }
+
+            if (currentNode == null)
+                throw new Exception();
+        }
+
+        public void DeleteRecursively(int value)
         {
 
         }
 
-        public void DeleteRecursively()
+        public void DeleteRecursively(int value, Node currentNode)
         {
 
         }
