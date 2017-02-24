@@ -8,14 +8,16 @@ namespace BinarySearchTree
 {
     class BinarySearchTree
     {
-        public Node Root;
-
-        public BinarySearchTree()
+        public class Node // I'm getting errors when setting this class to private and I don't understand why
         {
-            
+            public Node Left;
+            public Node Right;
+            public int Data;
         }
 
-        public void InsertIterarively(int value)
+        private Node Root;
+
+        public void InsertIteratively(int value)
         {
             if (Root == null)
             {
@@ -29,11 +31,11 @@ namespace BinarySearchTree
             Node nextNode = Root;
             Node parent = null;
 
-            while (nextNode!=null)
+            while (nextNode != null)
             {
                 parent = nextNode;
                 if (value < nextNode.Data)
-                    nextNode= nextNode.Left;
+                    nextNode = nextNode.Left;
                 else
                     nextNode = nextNode.Right;
             }

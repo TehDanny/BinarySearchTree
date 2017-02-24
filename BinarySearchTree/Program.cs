@@ -11,15 +11,15 @@ namespace BinarySearchTree
         static void Main(string[] args)
         {
             BinarySearchTree bst = new BinarySearchTree();
-            bst.InsertLinearly(40);
+            bst.InsertIteratively(40);
             Console.WriteLine("Test 1");
-            bst.InsertLinearly(45);
+            bst.InsertIteratively(45);
             Console.WriteLine("Test 2");
-            bst.InsertLinearly(50);
-            bst.InsertLinearly(33);
-            bst.InsertLinearly(1);
-            bst.InsertLinearly(3000);
-            bst.InsertLinearly(65);
+            bst.InsertIteratively(50);
+            bst.InsertIteratively(33);
+            bst.InsertIteratively(1);
+            bst.InsertIteratively(3000);
+            bst.InsertIteratively(65);
             Console.ReadLine();
         }
     }
