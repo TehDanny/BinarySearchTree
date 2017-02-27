@@ -11,15 +11,25 @@ namespace BinarySearchTree
         static void Main(string[] args)
         {
             BinarySearchTree bst = new BinarySearchTree();
+
             bst.InsertIteratively(40);
-            Console.WriteLine("Test 1");
-            bst.InsertIteratively(45);
-            Console.WriteLine("Test 2");
+            bst.InsertIteratively(20);
             bst.InsertIteratively(50);
-            bst.InsertIteratively(33);
-            bst.InsertIteratively(1);
-            bst.InsertIteratively(3000);
-            bst.InsertIteratively(65);
+            Console.WriteLine("Iterative insert works.");
+            bst.InsertRecursively(33);
+            bst.InsertRecursively(1);
+            bst.InsertRecursively(3000);
+            bst.InsertRecursively(65);
+            Console.WriteLine("Recursive insert works.");
+
+            Node node1 = bst.SearchIteratively(33);
+            Console.WriteLine("Search iteratively test: {0}", node1.Data);
+            Node node2 = bst.SearchRecursively(1);
+            Console.WriteLine("Search recursively test: {0}", node2.Data);
+
+            Console.WriteLine("High value iterative test: {0}", bst.FindHighestValueIteratively());
+            Console.WriteLine("High value recursive test: {0}", bst.FindHighestValueRecursively());
+
             Console.ReadLine();
         }
     }

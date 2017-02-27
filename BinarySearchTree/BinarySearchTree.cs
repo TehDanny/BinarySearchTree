@@ -8,13 +8,6 @@ namespace BinarySearchTree
 {
     class BinarySearchTree
     {
-        public class Node // I'm getting errors when setting this class to private and I don't understand why
-        {
-            public Node Left;
-            public Node Right;
-            public int Data;
-        }
-
         private Node Root;
 
         public void InsertIteratively(int value)
@@ -23,36 +16,38 @@ namespace BinarySearchTree
             {
                 Root = new Node();
                 Root.Data = value;
-                return;
             }
-
-            Node newNode = new Node();
-            newNode.Data = value;
-            Node nextNode = Root;
-            Node parent = null;
-
-            while (nextNode != null)
-            {
-                parent = nextNode;
-                if (value < nextNode.Data)
-                    nextNode = nextNode.Left;
-                else
-                    nextNode = nextNode.Right;
-            }
-            if (value < parent.Data)
-                parent.Left = newNode;
             else
-                parent.Right = newNode;
+            {
+                Node newNode = new Node();
+                newNode.Data = value;
+                Node nextNode = Root;
+                Node parent = null;
+
+                while (nextNode != null)
+                {
+                    parent = nextNode;
+                    if (value < nextNode.Data)
+                        nextNode = nextNode.Left;
+                    else
+                        nextNode = nextNode.Right;
+                }
+                if (value < parent.Data)
+                    parent.Left = newNode;
+                else
+                    parent.Right = newNode;
+            }
         }
 
         public void InsertRecursively(int value)
         {
             if (Root == null)
             {
+                Root = new Node();
                 Root.Data = value;
-                return;
             }
-            InsertRecursively(value, Root);
+            else
+                InsertRecursively(value, Root);
         }
 
         private void InsertRecursively(int value, Node currentNode)
@@ -83,7 +78,7 @@ namespace BinarySearchTree
             }
         }
 
-        public Node SearchInteratively(int value)
+        public Node SearchIteratively(int value)
         {
             if (Root == null)
                 return null;
@@ -100,9 +95,9 @@ namespace BinarySearchTree
                 if (value == currentNode.Data)
                     return currentNode;
                 else if (value < currentNode.Data)
-                    currentNode.Left = currentNode;
+                    currentNode = currentNode.Left;
                 else
-                    currentNode.Right = currentNode;
+                    currentNode = currentNode.Right;
             }
             return null;
         }
@@ -125,14 +120,58 @@ namespace BinarySearchTree
             if (value == currentNode.Data)
                 return currentNode;
             else if (value < currentNode.Data)
-                SearchRecursively(value, currentNode.Left);
+                return SearchRecursively(value, currentNode.Left);
             else
-                SearchRecursively(value, currentNode.Right);
-
-            return null;
+                return SearchRecursively(value, currentNode.Right);
         }
 
-        public void DeleteIteratively(int value) // not complete. I don't know how to write this without ref and I don't know how to use ref
+        public int FindHighestValueIteratively()
+        {
+            if (Root == null)
+                throw new Exception();
+
+            int highestValue = Root.Data;
+            Node currentNode = Root;
+
+            while (currentNode != null)
+            {
+                if (currentNode.Right != null)
+                {
+                    highestValue = currentNode.Right.Data;
+                    currentNode = currentNode.Right;
+                }
+                else
+                {
+                    currentNode = currentNode.Right;
+                }
+            }
+
+            return highestValue;
+        }
+
+        public int FindHighestValueRecursively()
+        {
+            if (Root == null)
+                throw new Exception();
+
+            return FindHighestValueRecursively(Root);
+        }
+
+        public int FindHighestValueRecursively(Node currentNode)
+        {
+            if (currentNode.Right != null)
+            {
+                return FindHighestValueRecursively(currentNode.Right);
+            }
+            else
+            {
+                return currentNode.Data;
+            }
+        }
+
+        public void DeleteIteratively(int value) 
+        // I didn't read the exercise properly, so I spend too much time in this method
+        // Not complete. I don't know how to write this without the ref keyword and I don't know how to use ref
         {
             if (Root == null)
                 throw new Exception();
@@ -140,7 +179,7 @@ namespace BinarySearchTree
             Node currentNode = Root;
             Node parentNode = null;
 
-            if (Root.Data == value) // dublicate code, but only way to delete Root without somehow using the ref keyword
+            if (Root.Data == value) // dublicate code, but only way I could find to try and delete Root
             {
                 if (Root.Left == null && Root.Left == null)
                 {
@@ -217,12 +256,22 @@ namespace BinarySearchTree
 
         public void DeleteRecursively(int value)
         {
-
+            throw new NotImplementedException();
         }
 
         public void DeleteRecursively(int value, Node currentNode)
         {
+            throw new NotImplementedException();
+        }
 
+        public List<Node> GetListInorder()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Node> GetListLevelOrder()
+        {
+            throw new NotImplementedException();
         }
     }
 }
